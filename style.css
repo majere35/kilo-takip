@@ -426,10 +426,16 @@ body.theme-neutral input, body.theme-neutral select {
 }
 
 .input-row {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr)); /* Force fixed column widths */
-    gap: 15px;
+    display: flex;
+    gap: 12px;
     width: 100%;
+    align-items: flex-end; /* Align labels and inputs bottom-up */
+}
+
+.input-row .input-group {
+    flex: 1; /* Split equally */
+    margin-bottom: 0;
+    min-width: 0; /* Important for Safari */
 }
 
 .primary-btn {
@@ -578,7 +584,20 @@ body.theme-neutral .tab-bar {
 .modal-content {
     width: 100%;
     max-width: 400px;
-    background: white;
+    background: var(--surface);
+    color: var(--text);
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    align-items: stretch;
+    border-radius: 20px;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+}
+
+.modal-content h3 {
+    text-align: center;
+    margin-bottom: 10px;
 }
 
 .quote-container {

@@ -318,10 +318,28 @@ function updateChart(range) {
             maintainAspectRatio: false,
             plugins: { legend: { display: false } },
             scales: {
-                y: { beginAtZero: false, grid: { display: false } },
-                x: { grid: { display: false } }
+                y: { 
+                    beginAtZero: false, 
+                    grid: { display: false },
+                    ticks: { color: 'rgba(255,255,255,0.7)' }
+                },
+                x: { 
+                    grid: { display: false },
+                    ticks: { color: 'rgba(255,255,255,0.7)' }
+                }
             }
-        }
+        },
+        plugins: [{
+            beforeDraw: (chart) => {
+                if (document.body.classList.contains('theme-neutral')) {
+                    chart.options.scales.x.ticks.color = '#2c3e50';
+                    chart.options.scales.y.ticks.color = '#2c3e50';
+                } else {
+                    chart.options.scales.x.ticks.color = 'rgba(255,255,255,0.7)';
+                    chart.options.scales.y.ticks.color = 'rgba(255,255,255,0.7)';
+                }
+            }
+        }]
     });
 }
 

@@ -8,23 +8,23 @@
     --neutral-text: #2c3e50;
     --neutral-accent: #7f8c8d;
 
-    /* Women Theme Colors */
-    --woman-primary: #ff758c;
-    --woman-secondary: #ff7eb3;
-    --woman-bg-start: #ff758c;
-    --woman-bg-end: #ff7eb3;
-    --woman-surface: rgba(255, 255, 255, 0.7);
-    --woman-text: #2d3436;
-    --woman-accent: #ff4d6d;
+    /* Women Theme Colors (Premium Dark) */
+    --woman-primary: #ff2e63;
+    --woman-secondary: #252a34;
+    --woman-bg-start: #1a1a1a;
+    --woman-bg-end: #0f0f0f;
+    --woman-surface: rgba(26, 26, 26, 0.85);
+    --woman-text: #eaeaea;
+    --woman-accent: #ff2e63;
     
-    /* Men Theme Colors */
-    --man-primary: #4FACFE;
-    --man-secondary: #00F2FE;
-    --man-bg-start: #4FACFE;
-    --man-bg-end: #00F2FE;
-    --man-surface: rgba(255, 255, 255, 0.7);
-    --man-text: #2d3436;
-    --man-accent: #00b4db;
+    /* Men Theme Colors (Premium Dark) */
+    --man-primary: #00d2ff;
+    --man-secondary: #1a1a1d;
+    --man-bg-start: #0f0c29;
+    --man-bg-end: #000000;
+    --man-surface: rgba(15, 12, 41, 0.85);
+    --man-text: #eaeaea;
+    --man-accent: #3a7bd5;
     
     /* Common variables */
     --shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15);
@@ -85,7 +85,7 @@ body {
     transition: background 0.6s ease;
 }
 
-/* Marble effect overlay */
+/* Specific Patterns per Theme */
 body::before {
     content: '';
     position: fixed;
@@ -93,10 +93,26 @@ body::before {
     left: 0;
     width: 100%;
     height: 100%;
-    background: url('https://www.transparenttextures.com/patterns/white-marble.png');
-    opacity: 0.1;
     pointer-events: none;
     z-index: -1;
+}
+
+body.theme-woman::before {
+    background-color: var(--woman-bg-start);
+    background-image: radial-gradient(circle at 2px 2px, rgba(255, 46, 99, 0.1) 1px, transparent 0);
+    background-size: 32px 32px;
+}
+
+body.theme-man::before {
+    background-color: var(--man-bg-start);
+    background-image: 
+        linear-gradient(45deg, rgba(0, 210, 255, 0.03) 25%, transparent 25%, transparent 50%, rgba(0, 210, 255, 0.03) 50%, rgba(0, 210, 255, 0.03) 75%, transparent 75%, transparent);
+    background-size: 60px 60px;
+}
+
+body.theme-neutral::before {
+    background: url('https://www.transparenttextures.com/patterns/white-marble.png');
+    opacity: 0.1;
 }
 
 #app {
@@ -132,13 +148,14 @@ body::before {
 /* Glassmorphism Card */
 .glass-card {
     background: var(--surface);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
     border-radius: var(--radius);
-    border: 1px solid rgba(255, 255, 255, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.1);
     padding: 25px;
-    box-shadow: var(--shadow);
+    box-shadow: 0 15px 35px rgba(0,0,0,0.4);
     width: 100%;
+    color: var(--text);
 }
 
 /* Header */
@@ -192,7 +209,8 @@ body::before {
     display: flex;
     flex-direction: column;
     align-items: center;
-    background: rgba(255, 255, 255, 0.9);
+    background: var(--surface);
+    border: 1px solid var(--accent);
 }
 
 .stat-item span {
@@ -391,13 +409,20 @@ label {
 input, select {
     padding: 12px 15px;
     border-radius: 12px;
-    border: 1px solid rgba(0,0,0,0.1);
-    background: white;
+    border: 1px solid rgba(255,255,255,0.1);
+    background: rgba(255,255,255,0.05);
+    color: var(--text);
     font-family: inherit;
     font-size: 1rem;
     width: 100%;
     max-width: 100%; /* Prevent stretching out of container */
     display: block;
+}
+
+body.theme-neutral input, body.theme-neutral select {
+    background: white;
+    color: #2c3e50;
+    border: 1px solid rgba(0,0,0,0.1);
 }
 
 .input-row {
@@ -486,17 +511,23 @@ body.theme-man .man-btn { border-color: white; box-shadow: 0 0 10px rgba(0,0,0,0
 .tab-bar {
     position: fixed;
     bottom: calc(20px + var(--safe-area-bottom));
-    left: 30px;
-    right: 30px;
-    height: 60px;
-    background: rgba(255, 255, 255, 0.8);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    border-radius: 30px;
+    left: 40px;
+    right: 40px;
+    height: 65px;
+    background: rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(25px);
+    -webkit-backdrop-filter: blur(25px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 35px;
     display: flex;
     justify-content: space-around;
     align-items: center;
-    box-shadow: 0 10px 40px rgba(0,0,0,0.15);
+    box-shadow: 0 15px 45px rgba(0,0,0,0.5);
+}
+
+body.theme-neutral .tab-bar {
+    background: rgba(255, 255, 255, 0.8);
+    color: #2c3e50;
 }
 
 .tab-item {

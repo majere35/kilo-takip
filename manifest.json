@@ -1,0 +1,16 @@
+{
+  "name": "Kilo Takip Premium",
+  "short_name": "Kilo Takip",
+  "start_url": "index.html",
+  "display": "standalone",
+  "background_color": "#ff758c",
+  "theme_color": "#ff758c",
+  "description": "Şık ve modern kilo takip uygulaması.",
+  "icons": [
+    {
+      "src": "https://cdn-icons-png.flaticon.com/512/3034/3034873.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

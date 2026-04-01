@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <title>Kilo Takip</title>
+    <!-- PWA Meta Tags -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Kilo Takip">
+    <link rel="apple-touch-icon" href="icons/icon-192.png">
+    <link rel="manifest" href="manifest.json">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="theme-woman"> <!-- Default theme -->
+    <div id="app">
+        <!-- Onboarding Screen -->
+        <section id="onboarding" class="view hidden">
+            <div class="glass-card">
+                <h1>Hoş Geldiniz</h1>
+                <p>Profilinizi oluşturarak başlayalım.</p>
+                <form id="onboarding-form">
+                    <div class="input-group">
+                        <label for="name">Ad Soyad</label>
+                        <input type="text" id="name" required placeholder="Örn: Ayşe Yılmaz">
+                    </div>
+                    <div class="input-row">
+                        <div class="input-group">
+                            <label for="age">Yaş</label>
+                            <input type="number" id="age" required placeholder="25">
+                        </div>
+                        <div class="input-group">
+                            <label for="gender">Cinsiyet</label>
+                            <select id="gender">
+                                <option value="woman">Kadın</option>
+                                <option value="man">Erkek</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="input-row">
+                        <div class="input-group">
+                            <label for="height">Boy (cm)</label>
+                            <input type="number" id="height" required placeholder="170">
+                        </div>
+                        <div class="input-group">
+                            <label for="weight">Kilo (kg)</label>
+                            <input type="number" step="0.1" id="weight" required placeholder="65.5">
+                        </div>
+                    </div>
+                    <div class="input-group">
+                        <label for="target-weight">Hedef Kilo (kg)</label>
+                        <input type="number" step="0.1" id="target-weight" required placeholder="60.0">
+                    </div>
+                    <button type="submit" class="primary-btn">Kaydet ve Başla</button>
+                </form>
+            </div>
+        </section>
+
+        <!-- Main Dashboard -->
+        <section id="dashboard" class="view hidden">
+            <header class="header">
+                <div>
+                    <span class="greeting">Merhaba,</span>
+                    <h2 id="display-name" class="user-name">User</h2>
+                </div>
+                <button id="settings-btn" class="icon-btn">⚙️</button>
+            </header>
+
+            <div class="stats-grid">
+                <div class="glass-card stat-item main-stat">
+                    <span>Güncel Kilo</span>
+                    <h3 id="current-weight">0.0 <span>kg</span></h3>
+                    <div id="weight-diff" class="diff-tag">İlerleme: 0kg</div>
+                </div>
+                <div class="glass-card stat-item">
+                    <span>BMI (VKI)</span>
+                    <h3 id="bmi-value">0.0</h3>
+                    <span id="bmi-status" class="small-text">Normal</span>
+                </div>
+                <div class="glass-card stat-item water-card">
+                    <div class="water-header">
+                        <span>Su Takibi</span>
+                        <h3 id="water-count">0 <span>L</span></h3>
+                    </div>
+                    <div class="water-progress-bar">
+                        <div id="water-progress-fill"></div>
+                    </div>
+                    <button id="add-water-btn" class="water-btn">💧 +250ml</button>
+                </div>
+                <div class="glass-card stat-item target-card">
+                    <span>Hedef</span>
+                    <h3 id="display-target">0.0 <span>kg</span></h3>
+                    <div class="target-progress">
+                        <div id="target-progress-fill"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="chart-section glass-card">
+                <div class="chart-header">
+                    <h3>İlerleme Grafiği</h3>
+                    <div class="chart-filters">
+                        <button class="filter-btn active" data-range="7">7G</button>
+                        <button class="filter-btn" data-range="30">30G</button>
+                        <button class="filter-btn" data-range="all">Hepsi</button>
+                    </div>
+                </div>
+                <div class="chart-container">
+                    <canvas id="weightChart"></canvas>
+                </div>
+            </div>
+
+            <div class="history-section">
+                <div class="section-header">
+                    <h3>Geçmiş Kayıtlar</h3>
+                    <button id="add-weight-btn" class="add-btn">+</button>
+                </div>
+                <div id="history-list" class="history-list">
+                    <!-- Records dynamicly added here -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Settings Screen -->
+        <section id="settings" class="view hidden">
+            <header class="header">
+                <button id="back-btn" class="icon-btn">←</button>
+                <h2>Ayarlar</h2>
+                <div style="width: 40px;"></div> <!-- Spacer -->
+            </header>
+            <div class="glass-card settings-group">
+                <h3>Görünüm</h3>
+                <div class="theme-toggle">
+                    <button class="theme-btn woman-btn" data-theme="woman">Kadın Teması</button>
+                    <button class="theme-btn man-btn" data-theme="man">Erkek Teması</button>
+                </div>
+            </div>
+            <div class="glass-card settings-group">
+                <h3>Profil Bilgileri</h3>
+                <div id="profile-summary">
+                    <!-- Dynamic summary -->
+                </div>
+                <button id="reset-data" class="danger-btn">Tüm Verileri Sıfırla</button>
+            </div>
+        </section>
+
+        <!-- Add Weight Modal -->
+        <div id="add-modal" class="modal hidden">
+            <div class="modal-content glass-card">
+                <div class="quote-container">
+                    <p id="motivation-quote">"Disiplin, motivasyonun tükendiği yerde devreye girer."</p>
+                </div>
+                <h3>Kilo Girişi</h3>
+                <form id="weight-form">
+                    <div class="input-group">
+                        <label for="log-date">Tarih</label>
+                        <input type="date" id="log-date" required>
+                    </div>
+                    <div class="input-group">
+                        <label for="log-weight">Kilo (kg)</label>
+                        <input type="number" step="0.1" id="log-weight" required placeholder="60.0">
+                    </div>
+                    <div class="modal-actions">
+                        <button type="button" id="close-modal" class="secondary-btn">İptal</button>
+                        <button type="submit" class="primary-btn">Ekle</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        
+        <!-- Navigation Bar (Floating) -->
+        <nav class="tab-bar">
+            <button class="tab-item active" data-tab="dashboard">🏠</button>
+            <button class="tab-item" id="quick-add-nav">➕</button>
+            <button class="tab-item" data-tab="settings">👤</button>
+        </nav>
+    </div>
+
+    <script src="app.js"></script>
+    <script>
+        // Register Service Worker
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('sw.js');
+        }
+    </script>
+</body>
+</html>

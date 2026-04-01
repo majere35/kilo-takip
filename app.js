@@ -65,6 +65,15 @@ function saveState() {
 }
 
 function setupEventListeners() {
+    // Onboarding Gender Change - Instant Theme Switch
+    const onboardGender = document.getElementById('gender');
+    if (onboardGender) {
+        onboardGender.addEventListener('change', (e) => {
+            const theme = e.target.value;
+            if (theme) applyTheme(theme);
+        });
+    }
+
     // Nav Tabs
     document.querySelectorAll('.tab-item[data-tab]').forEach(tab => {
         tab.addEventListener('click', () => {

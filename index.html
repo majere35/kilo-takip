@@ -21,7 +21,7 @@
     
     <link rel="stylesheet" href="style.css">
 </head>
-<body class="theme-woman"> <!-- Default theme -->
+<body class="theme-neutral"> <!-- Neutral theme start -->
     <div id="app">
         <!-- Onboarding Screen -->
         <section id="onboarding" class="view hidden">
@@ -30,21 +30,20 @@
                 <p>Profilinizi oluşturarak başlayalım.</p>
                 <form id="onboarding-form">
                     <div class="input-group">
+                        <label for="gender">Cinsiyet</label>
+                        <select id="gender">
+                            <option value="" disabled selected>Seçiniz</option>
+                            <option value="woman">Kadın</option>
+                            <option value="man">Erkek</option>
+                        </select>
+                    </div>
+                    <div class="input-group">
                         <label for="name">Ad Soyad</label>
                         <input type="text" id="name" required placeholder="Örn: Ayşe Yılmaz">
                     </div>
-                    <div class="input-row">
-                        <div class="input-group">
-                            <label for="age">Yaş</label>
-                            <input type="number" id="age" required placeholder="25">
-                        </div>
-                        <div class="input-group">
-                            <label for="gender">Cinsiyet</label>
-                            <select id="gender">
-                                <option value="woman">Kadın</option>
-                                <option value="man">Erkek</option>
-                            </select>
-                        </div>
+                    <div class="input-group">
+                        <label for="age">Yaş</label>
+                        <input type="number" id="age" required placeholder="25">
                     </div>
                     <div class="input-row">
                         <div class="input-group">

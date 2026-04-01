@@ -1,4 +1,13 @@
 :root {
+    /* Neutral Theme (Marble-like) */
+    --neutral-primary: #ecf0f1;
+    --neutral-secondary: #bdc3c7;
+    --neutral-bg-start: #ffffff;
+    --neutral-bg-end: #f8f9fa;
+    --neutral-surface: rgba(255, 255, 255, 0.9);
+    --neutral-text: #2c3e50;
+    --neutral-accent: #7f8c8d;
+
     /* Women Theme Colors */
     --woman-primary: #ff758c;
     --woman-secondary: #ff7eb3;
@@ -22,6 +31,16 @@
     --radius: 20px;
     --safe-area-top: env(safe-area-inset-top);
     --safe-area-bottom: env(safe-area-inset-bottom);
+}
+
+body.theme-neutral {
+    --primary: var(--neutral-primary);
+    --secondary: var(--neutral-secondary);
+    --bg-start: var(--neutral-bg-start);
+    --bg-end: var(--neutral-bg-end);
+    --surface: var(--neutral-surface);
+    --text: var(--neutral-text);
+    --accent: var(--neutral-accent);
 }
 
 body.theme-woman {
@@ -58,6 +77,21 @@ body {
     background-attachment: fixed;
     height: 100vh;
     overflow: hidden;
+    transition: background 0.6s ease;
+}
+
+/* Marble effect overlay */
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url('https://www.transparenttextures.com/patterns/white-marble.png');
+    opacity: 0.1;
+    pointer-events: none;
+    z-index: -1;
 }
 
 #app {

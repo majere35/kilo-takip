@@ -426,16 +426,22 @@ body.theme-neutral input, body.theme-neutral select {
 }
 
 .input-row {
-    display: flex;
-    gap: 12px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
     width: 100%;
-    align-items: flex-end; /* Align labels and inputs bottom-up */
 }
 
 .input-row .input-group {
-    flex: 1; /* Split equally */
     margin-bottom: 0;
-    min-width: 0; /* Important for Safari */
+    min-width: 0; /* Strict constraint for Safari */
+}
+
+input[type="date"] {
+    min-height: 45px;
+    -webkit-appearance: none; /* Reset Safari default */
+    appearance: none;
+    width: 100%;
 }
 
 .primary-btn {

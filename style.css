@@ -623,6 +623,45 @@ body.theme-neutral .tab-bar {
     line-height: 1.4;
 }
 
+/* BMI Modal Styling */
+.clickable {
+    cursor: pointer;
+    position: relative;
+    transition: transform 0.2s;
+}
+
+.clickable:active {
+    transform: scale(0.98);
+}
+
+.info-icon {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 0.8rem;
+    opacity: 0.6;
+}
+
+.bmi-info-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-top: 10px;
+}
+
+.bmi-info-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 12px 15px;
+    border-radius: 10px;
+    font-weight: 600;
+}
+
+.underweight { background: rgba(52, 152, 219, 0.15); color: #3498db; }
+.normal { background: rgba(46, 204, 113, 0.15); color: #2ecc71; }
+.overweight { background: rgba(241, 196, 15, 0.15); color: #f1c40f; }
+.obese { background: rgba(231, 76, 60, 0.15); color: #e74c3c; }
+
 .modal-actions {
     display: grid;
     grid-template-columns: 1fr 2fr;

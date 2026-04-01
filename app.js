@@ -33,7 +33,8 @@ const views = {
     onboarding: document.getElementById('onboarding'),
     dashboard: document.getElementById('dashboard'),
     settings: document.getElementById('settings'),
-    modal: document.getElementById('add-modal')
+    modal: document.getElementById('add-modal'),
+    bmiModal: document.getElementById('bmi-modal')
 };
 
 let weightChart = null;
@@ -110,6 +111,14 @@ function setupEventListeners() {
     document.getElementById('settings-btn').addEventListener('click', () => showView('settings'));
     document.getElementById('back-btn').addEventListener('click', () => showView('dashboard'));
     document.getElementById('reset-data').addEventListener('click', resetData);
+
+    // BMI Modal
+    document.getElementById('bmi-card').addEventListener('click', () => {
+        views.bmiModal.classList.remove('hidden');
+    });
+    document.getElementById('close-bmi-modal').addEventListener('click', () => {
+        views.bmiModal.classList.add('hidden');
+    });
 
     // Chart Filters
     document.querySelectorAll('.filter-btn').forEach(btn => {

@@ -19,7 +19,7 @@
     <!-- Chart.js -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     
-    <link rel="stylesheet" href="style.css?v=8">
+    <link rel="stylesheet" href="style.css?v=9">
 </head>
 <body class="theme-neutral"> <!-- Neutral theme start -->
     <div id="app">
@@ -80,10 +80,11 @@
                     <h3 id="current-weight">0.0 <span>kg</span></h3>
                     <div id="weight-diff" class="diff-tag">İlerleme: 0kg</div>
                 </div>
-                <div class="glass-card stat-item">
+                <div class="glass-card stat-item clickable" id="bmi-card">
                     <span>BMI (VKI)</span>
                     <h3 id="bmi-value">0.0</h3>
                     <span id="bmi-status" class="small-text">Normal</span>
+                    <div class="info-icon">ℹ️</div>
                 </div>
                 <div class="glass-card stat-item water-card">
                     <div class="water-header">
@@ -175,6 +176,35 @@
                         <button type="submit" class="primary-btn">Ekle</button>
                     </div>
                 </form>
+            </div>
+        </div>
+        
+        <!-- BMI Info Modal -->
+        <div id="bmi-modal" class="modal hidden">
+            <div class="modal-content glass-card">
+                <h3>VKI Kategorileri</h3>
+                <div class="bmi-info-list">
+                    <div class="bmi-info-item underweight">
+                        <span>Zayıf</span>
+                        <span>< 18.5</span>
+                    </div>
+                    <div class="bmi-info-item normal">
+                        <span>Normal</span>
+                        <span>18.5 - 24.9</span>
+                    </div>
+                    <div class="bmi-info-item overweight">
+                        <span>Fazla Kilolu</span>
+                        <span>25.0 - 29.9</span>
+                    </div>
+                    <div class="bmi-info-item obese">
+                        <span>Obez</span>
+                        <span>> 30.0</span>
+                    </div>
+                </div>
+                <p class="small-text" style="margin-top: 15px; opacity: 0.7; text-align: center;">
+                    Vücut kitle indeksi, kilonuzun boyunuza oranını gösteren bir rehberdir.
+                </p>
+                <button type="button" id="close-bmi-modal" class="primary-btn">Tamam</button>
             </div>
         </div>
         

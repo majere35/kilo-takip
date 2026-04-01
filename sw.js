@@ -1,4 +1,4 @@
-const CACHE_NAME = 'kilotakip-v1';
+const CACHE_NAME = 'kilotakip-v2';
 const urlsToCache = [
   '/',
   '/index.html',
